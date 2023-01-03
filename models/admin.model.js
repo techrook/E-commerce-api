@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const UserSchema = new mongoose.Schema({
+const AdminSchema = new mongoose.Schema({
     fristname:{
         type:String,
         required:true
@@ -20,8 +20,8 @@ const UserSchema = new mongoose.Schema({
     },
     isAdmin:{
         type:Boolean,
-        default:false
+        default:true
     },
 })
 
-module.exports = mongoose.model('Users',UserSchema)
+module.exports = mongoose.model('Admin',AdminSchema)
