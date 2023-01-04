@@ -5,8 +5,8 @@ const {createAdmin,loginAdmin, updateAdmin, deleteAdmin} = require('../controlle
 
 
 
-router.post('/register', createAdmin)
-router.post('/login', loginAdmin)
+router.post('/admin/register', createAdmin)
+router.post('/admin/login', loginAdmin)
 router.patch('/:id', updateAdmin)
 router.delete('/:id', deleteAdmin)
 
