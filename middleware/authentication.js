@@ -1,5 +1,7 @@
 const user = require('../models/user.model')
 const jwt = require('jsonwebtoken')
+require('dotenv').config();
+
 
 const auth = async (req,res,next)=>{
  //checking for the header
@@ -8,7 +10,7 @@ const auth = async (req,res,next)=>{
   res.status(401).json('Authentication invaild')
  }
  const token = authHeader.split(' ')[1]
-//  console.log(token)
+
  try {
    const payload = jwt.verify(token,process.env.JWT_SECRET)
    //attchin the user to the routes by adding the jwt

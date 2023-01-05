@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
 const AdminSchema = new mongoose.Schema({
-    fristname:{
+    firstname:{
         type:String,
         required:true
     },
