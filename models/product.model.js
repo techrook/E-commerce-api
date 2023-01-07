@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    cartegory:[{
+    category:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Category"
     }],
@@ -15,7 +15,7 @@ const ProductSchema = new mongoose.Schema({
         require: true
     },
     price: {
-        type: String,
+        type: Number,
         require: true
     },
     productimage : {
@@ -24,7 +24,8 @@ const ProductSchema = new mongoose.Schema({
     },
     quantity : {
         type: Number,
-        require: true
+        require: true,
+        max: 25
     },
     created_at : {
         type: Date,
