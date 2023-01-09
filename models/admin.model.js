@@ -21,10 +21,10 @@ const AdminSchema = new mongoose.Schema({
         required:true,
     },
     isAdmin:{
-        type:Boolean,
-        default:true
-    },
-})
+        type: Boolean,
+        default: true,
+      },
+},{ timestamps: true })
 
 //encrypting password 
 AdminSchema.pre('save',async function(next){
@@ -34,8 +34,9 @@ AdminSchema.pre('save',async function(next){
    })
    
    //created a jwt for the admin
-   AdminSchema.methods.createjwt = function(){
-       return jwt.sign({adminId:this._id, admin:this.admin},process.env.JWT_SECRET,
+   AdminSchema.methods.creatjwt = function(){
+       return jwt.sign({userId: this._id, name: this.name, isAdmin: this.isAdmin},
+        process.env.JWT_SECRET,
            {expiresIn:process.env.JWT_LIFESPAN})
    }
    

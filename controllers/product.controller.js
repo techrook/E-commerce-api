@@ -13,9 +13,10 @@ const upload = multer({ storage: Storage }).single('testImage');
 
 //get all product
 const getAllProducts = async (req, res) => {
-
+     console.log(req.user);
     await Products.find().populate({path : "category", model: "Category"})
     .then(product => (
+
         res.status(200).json(product)
     ))
     .catch(error => {

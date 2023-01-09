@@ -7,8 +7,8 @@ const auth = require('../middleware/authentication')
 
 router.post('/register', createUser)
 router.post('/login', loginUser)
-router.put('/:id', auth,updateUser)
-router.delete('/:id', auth,deleteUser)
+router.put('/:id',auth, updateUser)
+router.delete('/:id', auth, deleteUser)
 
 
 
