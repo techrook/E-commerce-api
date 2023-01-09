@@ -17,6 +17,7 @@ const getAllProducts = async (req, res) => {
     await Products.find().populate({path : "category", model: "Category"})
     .then(product => (
         res.status(200).json(product)
+        
     ))
     .catch(error => {
         res.status(404).json(error)
