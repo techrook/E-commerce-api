@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const productController = require('../controllers/product.controller');
- const auth = require("../middleware/authentication");
+const auth = require("../middleware/authentication");
 const verifiedAdmin = require('../middleware/authorization')
  
 
