@@ -32,8 +32,8 @@ const loginAdmin = async(req,res)=>{
         res.status(403).json('Invalid Password')
     }
     //sending the admin name and token
-    const token = admin.createjwt()
-    res.status(201).json({user:{admin:admin.firstname}, token})
+    const token = admin.creatjwt()
+    res.status(201).json({user:{name:admin.firstname}, token})
 }
 
 //update Admin
