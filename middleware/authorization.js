@@ -1,8 +1,10 @@
-require('../models/admin.model')
+const admin = require('../models/admin.model')
 
 const checkAdmin = (req, res, next) => {
-  if(!req.user.isAdmin){
-    console.log(req.user.isAdmin);
+  admin.findOne(req.user.userId)
+  if(!req.user.userId){
+    console.log(req.user.userId);
+
    return res.status(401).json({ error: 'Unauthorized' })
 }
     next()

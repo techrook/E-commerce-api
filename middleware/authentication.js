@@ -1,6 +1,5 @@
 const user = require('../models/user.model')
 const jwt = require('jsonwebtoken')
-require('dotenv').config();
 
 
 const auth = async (req,res,next)=>{
@@ -14,13 +13,8 @@ const auth = async (req,res,next)=>{
  try {
    const payload = jwt.verify(token,process.env.JWT_SECRET)
    //attchin the user to the routes by adding the jwt
-
-   req.user = {userId:payload.userId, username:payload.username}
-   console.log(req.user); 
-=======
    req.user = {userId:payload.userId, name:payload.name}
    
-
   next()
  } catch (error) {
    console.log(error);
@@ -28,9 +22,4 @@ const auth = async (req,res,next)=>{
  }
 } 
 
-
-
 module.exports = auth
-
-module.exports = auth
-
