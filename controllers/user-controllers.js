@@ -32,7 +32,7 @@ const loginUser = async(req,res)=>{
     }
     //sending the user name and token
     const token = user.createjwt()
-    res.status(201).json({user:{name:user.fristname}, token})
+    res.status(201).json({user:{name:user.firstname}, token})
 } 
 
 //updating a user

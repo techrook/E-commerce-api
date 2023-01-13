@@ -33,7 +33,7 @@ const loginAdmin = async(req,res)=>{
     }
     //sending the admin name and token
     const token = admin.creatjwt()
-    res.status(201).json({user:{name:admin.firstname}, token})
+    res.status(201).json({admin:{name:admin.firstname}, token})
 }
 
 //update Admin
