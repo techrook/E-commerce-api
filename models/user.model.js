@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 
 const UserSchema = new mongoose.Schema({
-    fristname:{
+    firstname:{
         type:String,
         required:true
     },
@@ -41,7 +41,7 @@ UserSchema.pre('save',async function(next){
 
 //created a jwt for the user 
 UserSchema.methods.createjwt = function(){
-    return jwt.sign({userId:this._id, name:this.name, },process.env.JWT_SECRET,
+    return jwt.sign({userId:this._id, name:this.firstname, isAdmin:false},process.env.JWT_SECRET,
         {expiresIn:process.env.JWT_LIFESPAN})
 }
 
