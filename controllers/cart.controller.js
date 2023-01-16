@@ -11,97 +11,31 @@ const addToCart = async(req, res) => {
     console.log(req.query.quantity);
 
     try {
-      const stock =  Products.findById(productId)
-      if(stock.quantity < quantity){
+      const stock = await  Products.findById(productId)
+      console.log(stock.quantity);
+      if(stock.quantity > quantity){
+        
         const cart = await Cart.create({ product: productId, user: userId, quantity: quantity })
-        res.status(200).json(cart,{ message:'added successfully!'})
+        res.status(200).json({ message:'added successfully!', data : cart})
       }else{
         res.status(400).json('Product is out of stock')  
       }
     }catch (error) {
       return res.status(400).send({ message: "unable to create order", error });
     }
-       
-            
-    
-    
-    
 
 }
 
 
 
-// const addToCart = async(req, res) => {
-//     // Extract product information from request body
-//     const { product_Id, quantity } = req.body;
-//     console.log(product_Id);
 
-//     // Retrieve product from the database
-//     try {
-//         const product = await Products.findOne({ _id: product_Id });
-//         if (quantity > product.stock) {
-//             res.status(400).json(' Not enough stock for this product.')
-//         } else {
-//           // Add item to cart
-//           const cart = Cart.create()
-//           return res.status(201).json(cart,{message:'added successfuly'})
-//         }
-//       } catch(err) {
-//         // handle error
-//        res.status(400).json(err,{ message: "unable to create order"});
-//       }
-// }
-
-
-
-
-
-    const userId = req.body.user
-    const productId = req.body.product
-    var quantity = parseInt(req.body.quantity)
-
-    
-
-    try {
-         const stock =  await Products.findById(productId)
-         console.log(stock.quantity)
-         console.log(quantity)
-        if(stock.quantity < quantity){
-            await Cart.create({
-                product:productId ,
-                user: userId,
-                quantity: quantity
-            })
-            .then(cart => {
-                return res.status(201).json({
-                    message: "product added to the cart"
-                })
-               
-            })
-            .catch(error => {
-                return res.status(400).json({
-                    message: "An error product not added to cart",
-                    data: error
-                })
-            })
-        }
-
-    }
-    catch (error) {
-        return res.status(500).json({
-            message: "an error occured",
-            data: error
-        })
-    }
-}
 
 
 
 const getCart = async (req, res) => {
     const id = req.params.id
 
-    console.log(id)
-    await Cart.findById(id).populate({path: "product", model: "Products", path: "user", model: "Admin"})
+    await Cart.findById(id).populate({path: "product", model: "Products"}).populate({ path: "user", model: "Users"})
     .then(cart => {
         res.status(200).json(cart)
     })

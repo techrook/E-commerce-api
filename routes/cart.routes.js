@@ -4,7 +4,7 @@ const cartController = require('../controllers/cart.controller')
 const auth = require("../middleware/authentication");
 
 router.get('/:id',auth, cartController.getCart);
-router.post('/',auth, cartController.addToCart);
+router.post('/:id',auth, cartController.addToCart);
 router.patch('/');
 router.delete('/:id');
 

@@ -11,16 +11,13 @@ const checkAdmin = async (req, res, next) => {
 
   if(!req.user.userId){
    return res.status(401).json({ error: 'Unauthorized' })
-}console.log(req.user);
+}
 
     next()
-  }else{
-   return res.status(401).json({ error: 'Unauthorized' })
   }
-
 };
 
-
+}
 
 
 

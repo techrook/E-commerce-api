@@ -13,7 +13,6 @@ const upload = multer({ storage: Storage }).single('productimage');
 
 //get all product
 const getAllProducts = async (req, res) => {
-     console.log(req.user);
     await Products.find().populate({path : "category", model: "Category"})
     .then(product => (
 
@@ -86,14 +85,7 @@ const updateProduct = async (req, res) => {
     const id = req.params.id
 
      
-    console.log(updates);
-    
-    await Products.findByIdAndUpdate(id, {$set:updates}, {new:true})
-    .then(product => {
-
-
-    console.log(req.body)
-    await Products.findByIdAndUpdate(id, {$set:updates}, {new:true})
+     Products.findByIdAndUpdate(id, {$set:updates}, {new:true})
     .then(updates => {
 
         res.status(202).json({
@@ -107,6 +99,7 @@ const updateProduct = async (req, res) => {
             data: error
         })
     })
+
 }
 
 //delete product

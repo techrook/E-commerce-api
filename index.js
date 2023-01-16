@@ -30,7 +30,12 @@ app.use('/category', categoryRouter);
 
 const port = process.env.PORT || 3023;
 
-
+app.use((err, req, res, next) => {
+    res.locals.error = err;
+    const status = err.status || 500;
+    res.status(status);
+    res.render('error');
+  });
 
 
 

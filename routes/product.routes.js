@@ -12,14 +12,6 @@ router.get('/:id', productController.getOneProductById);
 router.post('/', auth,checkAdmin, productController.addProduct);
 router.patch('/:id',auth,checkAdmin, productController.updateProduct);
 
-const auth = require("../middleware/authentication");
-
-
-router.get('/',  productController.getAllProducts);
-router.get('/:id', productController.getOneProductById);
-router.post('/', auth, productController.addProduct);
-router.patch('/:id',auth, productController.updateProduct);
-router.delete('/:id',auth,  productController.deleteProduct);
 
 
 module.exports = router;
