@@ -57,10 +57,11 @@ const addProduct = async (req, res) => {
                 ,
                 description: req.body.description,
                 price: req.body.price,
-                 productimage:{
+                productimage:{
                     data:req.file.filename,
                     contentType: 'image/png'
-                 },
+                },
+                
                 quantity: req.body.quantity })
                 .then(productData => {
                     res.status(201).json({
@@ -83,8 +84,10 @@ const addProduct = async (req, res) => {
 const updateProduct = async (req, res) => {
     const updates = req.body
     const id = req.params.id
-
-    await Products.findByIdAndUpdate(id, updates)
+     
+    console.log(updates);
+    
+    await Products.findByIdAndUpdate(id, {$set:updates}, {new:true})
     .then(product => {
         res.status(202).json({
             message: "product updated successfully ",
