@@ -2,6 +2,60 @@ const Cart = require('../models/cart.model');
 const Products = require('../models/product.model')
 
 const addToCart = async(req, res) => {
+
+    const userId = req.user.userId
+    console.log(req.user.userId);
+    const productId = req.params.id
+    console.log(req.params.id)
+    const quantity = req.query.quantity
+    console.log(req.query.quantity);
+
+    try {
+      const stock =  Products.findById(productId)
+      if(stock.quantity < quantity){
+        const cart = await Cart.create({ product: productId, user: userId, quantity: quantity })
+        res.status(200).json(cart,{ message:'added successfully!'})
+      }else{
+        res.status(400).json('Product is out of stock')  
+      }
+    }catch (error) {
+      return res.status(400).send({ message: "unable to create order", error });
+    }
+       
+            
+    
+    
+    
+
+}
+
+
+
+// const addToCart = async(req, res) => {
+//     // Extract product information from request body
+//     const { product_Id, quantity } = req.body;
+//     console.log(product_Id);
+
+//     // Retrieve product from the database
+//     try {
+//         const product = await Products.findOne({ _id: product_Id });
+//         if (quantity > product.stock) {
+//             res.status(400).json(' Not enough stock for this product.')
+//         } else {
+//           // Add item to cart
+//           const cart = Cart.create()
+//           return res.status(201).json(cart,{message:'added successfuly'})
+//         }
+//       } catch(err) {
+//         // handle error
+//        res.status(400).json(err,{ message: "unable to create order"});
+//       }
+// }
+
+
+
+
+
     const userId = req.body.user
     const productId = req.body.product
     var quantity = parseInt(req.body.quantity)
@@ -40,6 +94,7 @@ const addToCart = async(req, res) => {
         })
     }
 }
+
 
 
 const getCart = async (req, res) => {
