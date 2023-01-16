@@ -9,7 +9,7 @@ const Storage = multer.diskStorage({
     }
 });
  
-const upload = multer({ storage: Storage }).single('testImage');
+const upload = multer({ storage: Storage }).single('productimage');
 
 //get all product
 const getAllProducts = async (req, res) => {
@@ -84,11 +84,13 @@ const updateProduct = async (req, res) => {
     const updates = req.body
     const id = req.params.id
 
-    await Products.findByIdAndUpdate(id, updates)
-    .then(product => {
+    console.log(req.body)
+    await Products.findByIdAndUpdate(id, {$set:updates}, {new:true})
+    .then(updates => {
+        
         res.status(202).json({
             message: "product updated successfully ",
-            data: product
+            data: updates
         })
     })
     .catch(error => {
