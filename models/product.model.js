@@ -27,11 +27,9 @@ const ProductSchema = new mongoose.Schema({
         require: true,
         max: 25
     },
-    created_at : {
-        type: Date,
-        default: Date.now
-    }
-});
+},
+    { timestamps: true }
+);
 
 //creating product model
 module.exports = mongoose.model('Products', ProductSchema);
