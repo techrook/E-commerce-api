@@ -11,7 +11,8 @@ const CartSchema = new mongoose.Schema({
     },
     quantity: {
         type : Number,
-        default: 0
+        default: 1,
+        required: true
     }
 },{ timestamps: true })
 

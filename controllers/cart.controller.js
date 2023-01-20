@@ -1,24 +1,37 @@
 const Cart = require('../models/cart.model');
 const Products = require('../models/product.model')
 
+
+//add a product to cart
 const addToCart = async(req, res) => {
 
     const userId = req.user.userId
-    console.log(req.user.userId);
+    //console.log(req.user.userId);
     const productId = req.params.id
-    console.log(req.params.id)
+    //console.log(req.params.id)
     const quantity = req.query.quantity
-    console.log(req.query.quantity);
+    //console.log(req.query.quantity);
 
+    
+    
     try {
+        if(quantity < 1){
+          res.status(400).json('vjf,d')
+        }
+      
       const stock = await  Products.findById(productId)
       console.log(stock.quantity);
+      
       if(stock.quantity > quantity){
         
         const cart = await Cart.create({ product: productId, user: userId, quantity: quantity })
+        
+        const updatedStockQuantity = stock.quantity - quantity;
+        await Products.findOneAndUpdate({ _id: stock.id }, { quantity: updatedStockQuantity },{ new: true });
+        
         res.status(200).json({ message:'added successfully!', data : cart})
       }else{
-        res.status(400).json('Product is out of stock')  
+        res.status(400).json({ message:'Product is out of stock'})  
       }
     }catch (error) {
       return res.status(400).send({ message: "unable to create order", error });
@@ -31,7 +44,7 @@ const addToCart = async(req, res) => {
 
 
 
-
+// get a paticular cart
 const getCart = async (req, res) => {
     const id = req.params.id
 
@@ -47,7 +60,30 @@ const getCart = async (req, res) => {
     })
 }
 
+//update cart
+ const updatecart = async(req,res)=>{
+  try {
+    const updatedCart = await Cart.findByIdAndUpdate( req.params.id, {$set:req.body,},{ new:true } );
+    res.status(200).json(updatedCart,{message:'cart updated'});
+  } catch (err) {
+    res.status(400).json(err);
+  }
+ }
+
+
+// delete cart
+const deletecart = async(req,res)=>{
+  try {
+    await Cart.findByIdAndDelete(req.params.id);
+    res.status(200).json("Cart has been deleted...");
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
+
 module.exports = {
     addToCart,
-    getCart
+    getCart,
+    updatecart,
+    deletecart
 }

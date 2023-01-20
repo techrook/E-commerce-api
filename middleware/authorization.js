@@ -1,24 +1,40 @@
 const admin = require('../models/admin.model')
+const Cart = require('../models/cart.model')
 
 
 const checkAdmin = (req, res, next) => {
   // admin.findOne(req.user.userId)
-  if(req.user.isAdmin){
-    console.log(req.user);
-
-const checkAdmin = async (req, res, next) => {
-  await admin.findOne(req.user.userId)
-
-  if(!req.user.userId){
-   return res.status(401).json({ error: 'Unauthorized' })
-}
-
-    next()
+    if(req.user.isAdmin){
+      next()
+    }else{
+      return res.status(401).json({ error: 'Unauthorized' })
+    }
   }
-};
 
+
+   const checkUser = async (req, res, next)=> {
+    const cartId = req.params.id;
+    const userId = req.headers.userId;
+  
+    // Retrieve the cart item from the database
+    const cartItem = Cart.findById(cartId);
+  
+    // Compare the userId of the cart item with the userId from the request
+    if (cartItem.userId === userId) {
+      // Allow the request to proceed
+      next();
+    } else {
+      // Return an error message
+      res.status(401).json({error: "Unauthorized to update this cart"});
+    }
+  }
+  
+
+
+
+
+
+module.exports = {
+  checkAdmin,
+  checkUser
 }
-
-
-
-module.exports = checkAdmin

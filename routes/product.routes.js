@@ -8,6 +8,7 @@ const productController = require('../controllers/product.controller');
 const auth = require('../middleware/authentication');
 const  checkAdmin = require('../middleware/authorization');
 const productValidatorMiddleware = require('../validator/product.validator');
+
  
 
 router.get('/',  productController.getAllProducts);
