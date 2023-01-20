@@ -14,11 +14,7 @@ const addToCart = async(req, res) => {
 
     
     
-    try {
-        if(quantity < 1){
-          res.status(400).json('vjf,d')
-        }
-      
+    try {      
       const stock = await  Products.findById(productId)
       console.log(stock.quantity);
       
@@ -62,12 +58,22 @@ const getCart = async (req, res) => {
 
 //update cart
  const updatecart = async(req,res)=>{
-  try {
-    const updatedCart = await Cart.findByIdAndUpdate( req.params.id, {$set:req.body,},{ new:true } );
-    res.status(200).json(updatedCart,{message:'cart updated'});
-  } catch (err) {
-    res.status(400).json(err);
-  }
+
+  const update = req.body 
+
+  await Cart.findByIdAndUpdate( req.params.id, {$set:req.body,},{ new:true } )
+    .then( cart=> {
+      res.status(200).json(
+        {
+          message:'cart updated',
+          data : cart  });
+    })
+    .catch(err => {
+      res.status(400).json(
+        { message : "not updated", 
+      data : err});
+    })
+
  }
 
 
