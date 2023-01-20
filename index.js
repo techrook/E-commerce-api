@@ -28,6 +28,12 @@ app.use('/products', productRouter);
 app.use('/cart', cartRouter);
 app.use('/category', categoryRouter);
 
+
+app.use(function(req, res) {
+  res.status(404).send({url: req.originalUrl + ' not found'})
+})
+
+
 const port = process.env.PORT || 3023;
 
 app.use((err, req, res, next) => {

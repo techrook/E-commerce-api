@@ -4,7 +4,7 @@ const router = express.Router();
 const productController = require('../controllers/product.controller');
 
 const auth = require('../middleware/authentication')
- const  checkAdmin = require('../middleware/authorization')
+ const  {checkAdmin} = require('../middleware/authorization')
  
 
 router.get('/',  productController.getAllProducts);
