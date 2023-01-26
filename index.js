@@ -1,7 +1,9 @@
 //build dependencies
 const express = require('express');
+const paystack = require('paystack').config(process.env.PAYSTACKSECRET)
 const app = express();
 const bodyParser = require('body-parser');
+
 require('dotenv').config();
 
 // parse application/x-www-form-urlencoded
