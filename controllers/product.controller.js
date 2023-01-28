@@ -79,6 +79,7 @@ const addProduct = async (req, res) => {
 
 };
 
+
 //update product
 const updateProduct = async (req, res) => {
     const updates = req.body

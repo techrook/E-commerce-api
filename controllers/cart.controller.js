@@ -11,6 +11,7 @@ const addToCart = async(req, res) => {
     //console.log(req.params.id)
     const quantity = req.query.quantity
     //console.log(req.query.quantity);
+ 
 
     
     
@@ -20,10 +21,10 @@ const addToCart = async(req, res) => {
       
       if(stock.quantity > quantity){
         
-        const cart = await Cart.create({ product: productId, user: userId, quantity: quantity })
+        const cart = await Cart.create({ product: productId, user: userId, quantity: quantity, name:name })
         
-        const updatedStockQuantity = stock.quantity - quantity;
-        await Products.findOneAndUpdate({ _id: stock.id }, { quantity: updatedStockQuantity },{ new: true });
+        // const updatedStockQuantity = stock.quantity - quantity;
+        // await Products.findOneAndUpdate({ _id: stock.id }, { quantity: updatedStockQuantity },{ new: true });
         
         res.status(200).json({ message:'added successfully!', data : cart})
       }else{
@@ -79,9 +80,18 @@ const getCart = async (req, res) => {
 
 // delete cart
 const deletecart = async(req,res)=>{
+  const productId = req.params.id
+    //console.log(req.params.id)
+    const quantity = req.query.quantity
+    //console.log(req.query.quantity);
+
   try {
+    const stock = await  Products.findById(productId)
     await Cart.findByIdAndDelete(req.params.id);
+    const updatedStockQuantity = stock.quantity += quantity;
+    await Products.findOneAndUpdate({ _id: stock.id }, { quantity: updatedStockQuantity },{ new: true });
     res.status(200).json("Cart has been deleted...");
+        
   } catch (err) {
     res.status(400).json(err);
   }

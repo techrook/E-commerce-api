@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const ProductSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: true
+        required: true
     },
     category:[{
         type: mongoose.Schema.Types.ObjectId,
@@ -12,11 +12,11 @@ const ProductSchema = new mongoose.Schema({
     }],
     description: {
         type: String,
-        require: true
+        required: true
     },
     price: {
         type: Number,
-        require: true
+        required: true
     },
     productimage : {
         data: Buffer,
@@ -24,7 +24,7 @@ const ProductSchema = new mongoose.Schema({
     },
     quantity : {
         type: Number,
-        require: true,
+        required: true,
         max: 25
     },
 },
