@@ -49,7 +49,7 @@ const addProduct =  (req, res) => {
                 // upload to cloudinary
                 const result =  cloudinary.uploader.upload(imagePath);
 
-
+                
                 Products.create({
                 name: req.body.name,
                 category: (req.body.category == 'eletronics'? '63b8a5e32d8adb78c91a6c15' 

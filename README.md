@@ -80,14 +80,14 @@ This is an api for a E-commerce app
 ## APIs
 ---
 
-### Signup User
+### registar User
 
 - Route: user/register
 - Method: POST
 - Body: 
 ```
-{ "firstname" : "james",
-  "lastname" : "harden",
+<!-- { "firstname" : "james",
+  <!-- "lastname" : "harden",
   "email": "harden@gmail.com",
   "password": "thebeard13"
 }
@@ -102,7 +102,8 @@ signup successful
   "email": "harden@gmail.com",
   "password": "thebeard13"
 }
-```
+``` --> -->
+<img src = 'https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/userregister_dmoahu.jpg'>
 ---
 ### Login User
 
