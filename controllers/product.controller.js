@@ -1,19 +1,20 @@
 const Products = require('../models/product.model')
-const multer = require('multer');
-
-//image uploader
-const Storage = multer.diskStorage({
-    destination: "product_images",
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-});
+const cloudinary = require('cloudinary')
+const fs = require('fs')
  
-const upload = multer({ storage: Storage }).single('productimage');
+
+require('dotenv').config();
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
 
 //get all product
-const getAllProducts = async (req, res) => {
-    await Products.find().populate({path : "category", model: "Category"})
+const getAllProducts =  (req, res) => {
+    Products.find().populate({path : "category", model: "Category"})
     .then(product => (
 
         res.status(200).json(product)
@@ -25,10 +26,10 @@ const getAllProducts = async (req, res) => {
 };
 
 //get 0ne product
-const getOneProductById = async (req, res ) => {
+const getOneProductById =  (req, res ) => {
     const id = req.params.id
 
-    await Products.findById(id).populate({path : "category", model: "Category"})
+     Products.findById(id).populate({path : "category", model: "Category"})
     .then(product => (
         res.status(200).json(product)
     ))
@@ -37,14 +38,17 @@ const getOneProductById = async (req, res ) => {
     })
 };
 
+
+
 //add a product
-const addProduct = async (req, res) => {
+const addProduct =  (req, res) => {
  
-    await upload(req, res, (err)=> {
-        if(err){
-            console.log(err)
-        }
-        else{   console.log(req.body.category)
+    
+        const imagePath = req.file.path;
+        
+                // upload to cloudinary
+                const result =  cloudinary.uploader.upload(imagePath);
+
 
                 Products.create({
                 name: req.body.name,
@@ -57,12 +61,12 @@ const addProduct = async (req, res) => {
                 description: req.body.description,
                 price: req.body.price,
                 productimage:{
-                    data:req.file.filename,
-                    contentType: 'image/png'
+                    productimg : result.secure_url,
+                    productid : result.public_id
+
                 },
-                
                 quantity: req.body.quantity })
-                .then(productData => {
+                .then(productData => {                   
                     res.status(201).json({
                         message: "product has successfully been created",
                         data: productData
@@ -75,13 +79,10 @@ const addProduct = async (req, res) => {
                     })
                 })
         }
-    })
-
-};
 
 
 //update product
-const updateProduct = async (req, res) => {
+const updateProduct = (req, res) => {
     const updates = req.body
     const id = req.params.id
 

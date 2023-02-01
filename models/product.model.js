@@ -18,9 +18,9 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    productimage : {
-        data: Buffer,
-        contentType: String,
+    productimage:{
+        productimg:String,
+    productid:String,
     },
     quantity : {
         type: Number,

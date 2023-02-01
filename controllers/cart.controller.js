@@ -21,10 +21,8 @@ const addToCart = async(req, res) => {
       
       if(stock.quantity > quantity){
         
-        const cart = await Cart.create({ product: productId, user: userId, quantity: quantity, name:name })
+        const cart = await Cart.create({ product: productId, user: userId, quantity: quantity})
         
-        // const updatedStockQuantity = stock.quantity - quantity;
-        // await Products.findOneAndUpdate({ _id: stock.id }, { quantity: updatedStockQuantity },{ new: true });
         
         res.status(200).json({ message:'added successfully!', data : cart})
       }else{
@@ -58,11 +56,11 @@ const getCart = async (req, res) => {
 }
 
 //update cart
- const updatecart = async(req,res)=>{
+ const updatecart = (req,res)=>{
 
   const update = req.body 
 
-  await Cart.findByIdAndUpdate( req.params.id, {$set:req.body,},{ new:true } )
+ Cart.findByIdAndUpdate( req.params.id, {$set:req.body,},{ new:true } )
     .then( cart=> {
       res.status(200).json(
         {
@@ -81,9 +79,7 @@ const getCart = async (req, res) => {
 // delete cart
 const deletecart = async(req,res)=>{
   const productId = req.params.id
-    //console.log(req.params.id)
-    const quantity = req.query.quantity
-    //console.log(req.query.quantity);
+  const quantity = req.query.quantity
 
   try {
     const stock = await  Products.findById(productId)

@@ -1,8 +1,8 @@
 const Category = require('../models/category.model');
 
-const  getAllCategories = async (req, res) => {
+const  getAllCategories =  (req, res) => {
 
-    await Category.find()
+    Category.find()
     .then(categories => (
         res.status(200).json(categories)
     ))
@@ -11,10 +11,10 @@ const  getAllCategories = async (req, res) => {
     })
 }
 
-const  getACategories = async (req, res) => {
+const  getACategories =  (req, res) => {
     const id = req.params.id
 
-    await Category.findById(id)
+    Category.findById(id)
     .then(category => (
         res.status(200).json(category)
     ))
@@ -23,10 +23,10 @@ const  getACategories = async (req, res) => {
     })
 }
 
-const  addCategories = async (req, res) => {
+const  addCategories = (req, res) => {
     const category = req.body
 
-    await Category.create(category)
+     Category.create(category)
     .then(category => (
         res.status(200).json(category)
     ))
