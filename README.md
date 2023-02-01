@@ -85,25 +85,10 @@ This is an api for a E-commerce app
 - Route: user/register
 - Method: POST
 - Body: 
-```
-<!-- { "firstname" : "james",
-  <!-- "lastname" : "harden",
-  "email": "harden@gmail.com",
-  "password": "thebeard13"
-}
-```
 
-- Responses
-
-signup successful
-```
-{ "firstname" : "james",
-  "lastname" : "harden",
-  "email": "harden@gmail.com",
-  "password": "thebeard13"
-}
-``` --> -->
 <img src = 'https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/userregister_dmoahu.jpg'>
+
+[screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/userregister_dmoahu.jpg)
 ---
 ### Login User
 
