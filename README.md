@@ -100,7 +100,7 @@ CLOUDINARY_API_SECRET = cloudinary api secret
 
 [screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/userregister_dmoahu.jpg)
 <img src = "https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/userregister_dmoahu.jpg" />
----
+
 ### Login User
 
 - Route: user/login
@@ -121,7 +121,8 @@ CLOUDINARY_API_SECRET = cloudinary api secret
 [screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283837/e-commerce/adminReg_briaqm.jpg)
 
 <img src = "https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283837/e-commerce/adminReg_briaqm.jpg" />
----
+
+
 ### Login Admin
 
 - Route: admin/login
