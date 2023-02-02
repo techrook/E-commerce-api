@@ -86,8 +86,6 @@ This is an api for a E-commerce app
 - Method: POST
 - Body: 
 
-<img src = 'https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/userregister_dmoahu.jpg'>
-
 [screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/userregister_dmoahu.jpg)
 ---
 ### Login User
@@ -95,68 +93,25 @@ This is an api for a E-commerce app
 - Route: user/login
 - Method: POST
 - Body: 
-```
-{
-  "email": "harden@gmail.com",
-  "password": "thebeard13"
-}
-```
 
-- Responses
-
-Success
-```
-{   name : james,
-    token: 'sjlkafjkldsfjsdjc92u11u8ex e nxjjurvnroie83y37712jbuewbdjbcbc'
-}
-```
+[screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283864/e-commerce/userlogin_wtiims.jpg)
 
 ---
 
-### Signup Admin
+### register Admin
 
 - Route: admin/register
 - Method: POST
 - Body: 
-```
-{ "firstname" : "steph",
-  "lastname" : "curry",
-  "email": "curry@gmail.com",
-  "password": "chefcurry30"
-}
-```
+[screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283837/e-commerce/adminReg_briaqm.jpg)
 
-- Responses
-
-signup successful
-```
-{ "firstname" : "steph",
-  "lastname" : "curry",
-  "email": "curry@gmail.com",
-  "password": "chefcurry30"
-}
-```
 ---
 ### Login Admin
 
 - Route: admin/login
 - Method: POST
 - Body: 
-```
-{
-  "email": "curry@gmail.com",
-  "password": "chefcurry30"
-}
-```
-
-- Responses
-
-Success
-```
-{   admin : steph,
-    token: 'sjlkafjkldsfjsdjc92u11u8ex e nxjjurvnroie83y37712jbuewbdjbcbc'
-}
-```
+[screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/adminlogin_pcxxiw.jpg)
 
 ---
 ### Add product
@@ -237,9 +192,13 @@ Success
 
 
 ## Contributor
-- Itohowo Monday
-- ceasar
+- Itohowo Monday :
+[Github](https://github.com/techrook)
+[twitter](https://twitter.com/Itohowo23)
 
+- ceasar : 
+[Github](https://github.com/caesarkutaa)
+[twitter](https://twitter.com/Caesarkuta)
 ---
 
 

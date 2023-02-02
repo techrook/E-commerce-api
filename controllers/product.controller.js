@@ -41,16 +41,16 @@ const getOneProductById =  (req, res ) => {
 
 
 //add a product
-const addProduct =  (req, res) => {
- 
+const addProduct =  async (req, res, error) => {
     
         const imagePath = req.file.path;
         
                 // upload to cloudinary
-                const result =  cloudinary.uploader.upload(imagePath);
-
+                const result =   await cloudinary.uploader.upload(imagePath);
+                console.log(result.secure_url)
+                console.log(result.secure_url)
                 
-                Products.create({
+                await Products.create({
                 name: req.body.name,
                 category: (req.body.category == 'eletronics'? '63b8a5e32d8adb78c91a6c15' 
                 :req.body.category == 'books'? '63b8a5f32d8adb78c91a6c17' 
@@ -60,26 +60,18 @@ const addProduct =  (req, res) => {
                 ,
                 description: req.body.description,
                 price: req.body.price,
-                productimage:{
-                    productimg : result.secure_url,
-                    productid : result.public_id
-
+                productImage :{
+                    productImg: result.secure_url ,
+                    productid:result.public_id,
                 },
                 quantity: req.body.quantity })
-                .then(productData => {                   
-                    res.status(201).json({
-                        message: "product has successfully been created",
-                        data: productData
-                    })
-                })
-                .catch(error => {
-                    res.status(400).json({
-                        message: "An error occured when trying to create product",
-                        data: error
-                    })
-                })
-        }
 
+                return res.status(201).json({
+                    message: "product has successfully been created",
+                })
+
+}  
+                
 
 //update product
 const updateProduct = (req, res) => {
