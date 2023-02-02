@@ -22,6 +22,18 @@ This is an api for a E-commerce app
 - run `npm install` for dependencies
 - run `npm run start:dev`
 
+example.env 
+```
+PORT = 8080
+MONGODB_URL= enter your mongoDB URL
+JWT_SECRET = JCNBDU498BFINE849 (any random characters)
+JWT_LIFESPAN= '4h' 
+
+CLOUDINARY_CLOUD_NAME = enter your  cloudinary cloud username
+CLOUDINARY_API_KEY = cloudinary api key
+CLOUDINARY_API_SECRET = cloudinary api secret
+```
+
 ## Base URL
 - 
 
@@ -87,6 +99,7 @@ This is an api for a E-commerce app
 - Body: 
 
 [screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/userregister_dmoahu.jpg)
+<img src = "https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/userregister_dmoahu.jpg" />
 ---
 ### Login User
 
@@ -95,6 +108,8 @@ This is an api for a E-commerce app
 - Body: 
 
 [screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283864/e-commerce/userlogin_wtiims.jpg)
+
+<img src = "https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283864/e-commerce/userlogin_wtiims.jpg" />
 
 ---
 
@@ -105,13 +120,15 @@ This is an api for a E-commerce app
 - Body: 
 [screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283837/e-commerce/adminReg_briaqm.jpg)
 
+<img src = "https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283837/e-commerce/adminReg_briaqm.jpg" />
 ---
 ### Login Admin
 
 - Route: admin/login
 - Method: POST
 - Body: 
-[screenshot](https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/adminlogin_pcxxiw.jpg)
+
+<img src = "https://res.cloudinary.com/dtof4ew2t/image/upload/v1675283872/e-commerce/adminlogin_pcxxiw.jpg" />
 
 ---
 ### Add product
@@ -138,7 +155,7 @@ image
 Success
 
 ```
-image
+IMG
 ```
 ---
 
@@ -188,7 +205,6 @@ Success
 ```
 
 ---
-
 
 
 ## Contributor
