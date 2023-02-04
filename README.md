@@ -35,7 +35,7 @@ CLOUDINARY_API_SECRET = cloudinary api secret
 ```
 
 ## Base URL
-- 
+- https://e-commerce-api.hop.sh/   
 
 
 ## Models
