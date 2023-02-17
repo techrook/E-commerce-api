@@ -1,8 +1,9 @@
 //build dependencies
 const express = require('express');
-// const paystack = require('paystack').config(process.env.PAYSTACKSECRET)
+const cors = require('cors')
 const app = express();
 const bodyParser = require('body-parser');
+
 
 require('dotenv').config();
 
@@ -10,6 +11,8 @@ require('dotenv').config();
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
+// Enable All CORS Requests
+app.use(cors())
 
 //connect database
 require('./DB/db').connect();
