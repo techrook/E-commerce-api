@@ -1,12 +1,12 @@
-const express = require("express");
-const router = express.Router();
+const { Router } = require("express");
+const router = Router();
 
 const {
   createAdmin,
   loginAdmin,
   updateAdmin,
   deleteAdmin,
-} = require("../controllers/admin-controllers");
+} = require("../controllers/admin.controllers");
 const auth = require("../middleware/authentication");
 const adminValidatorMiddleware = require("../validator/admin.validator");
 

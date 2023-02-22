@@ -1,12 +1,12 @@
-const express = require("express");
-const router = express.Router();
+const { Router } = require("express");
+const router = Router();
 
 const {
   createUser,
   loginUser,
   updateUser,
   deleteUser,
-} = require("../controllers/user-controllers");
+} = require("../controllers/user.controllers");
 const auth = require("../middleware/authentication");
 const userValidatorMiddleware = require("../validator/user.validator");
 

@@ -1,6 +1,8 @@
-const express = require("express");
-const router = express.Router();
+const { Router } = require("express");
 const multer = require("multer");
+
+const router = Router();
+
 //controller
 const productController = require("../controllers/product.controller");
 
