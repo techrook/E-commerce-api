@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "lint": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -26,5 +27,8 @@
     "nodemon": "^2.0.20",
     "paypal-rest-sdk": "^1.8.1",
     "paystack": "^2.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.4"
   }
 }

@@ -1,101 +1,92 @@
-const Cart = require('../models/cart.model');
-const Products = require('../models/product.model')
-
+const Cart = require("../models/cart.model");
+const Products = require("../models/product.model");
 
 //add a product to cart
-const addToCart = async(req, res) => {
+const addToCart = async (req, res) => {
+  const userId = req.user.userId;
+  //console.log(req.user.userId);
+  const productId = req.params.id;
+  //console.log(req.params.id)
+  const quantity = req.query.quantity;
+  //console.log(req.query.quantity);
 
-    const userId = req.user.userId
-    //console.log(req.user.userId);
-    const productId = req.params.id
-    //console.log(req.params.id)
-    const quantity = req.query.quantity
-    //console.log(req.query.quantity);
- 
+  try {
+    const stock = await Products.findById(productId);
+    console.log(stock.quantity);
 
-    
-    
-    try {      
-      const stock = await  Products.findById(productId)
-      console.log(stock.quantity);
-      
-      if(stock.quantity > quantity){
-        
-        const cart = await Cart.create({ product: productId, user: userId, quantity: quantity})
-        
-        
-        res.status(200).json({ message:'added successfully!', data : cart})
-      }else{
-        res.status(400).json({ message:'Product is out of stock'})  
-      }
-    }catch (error) {
-      return res.status(400).send({ message: "unable to create order", error });
+    if (stock.quantity > quantity) {
+      const cart = await Cart.create({
+        product: productId,
+        user: userId,
+        quantity: quantity,
+      });
+
+      res.status(200).json({ message: "added successfully!", data: cart });
+    } else {
+      res.status(400).json({ message: "Product is out of stock" });
     }
-
-}
-
-
-
-
-
+  } catch (error) {
+    return res.status(400).send({ message: "unable to create order", error });
+  }
+};
 
 // get a paticular cart
 const getCart = async (req, res) => {
-    const id = req.params.id
+  const id = req.params.id;
 
-    await Cart.findById(id).populate({path: "product", model: "Products"}).populate({ path: "user", model: "Users"})
-    .then(cart => {
-        res.status(200).json(cart)
+  await Cart.findById(id)
+    .populate({ path: "product", model: "Products" })
+    .populate({ path: "user", model: "Users" })
+    .then((cart) => {
+      res.status(200).json(cart);
     })
-    .catch(error => {
-        res.status(404).json({
-            message: "cart not found",
-            data: error
-        })
-    })
-}
+    .catch((error) => {
+      res.status(404).json({
+        message: "cart not found",
+        data: error,
+      });
+    });
+};
 
 //update cart
- const updatecart = (req,res)=>{
+const updatecart = (req, res) => {
+  const update = req.body;
 
-  const update = req.body 
-
- Cart.findByIdAndUpdate( req.params.id, {$set:req.body,},{ new:true } )
-    .then( cart=> {
-      res.status(200).json(
-        {
-          message:'cart updated',
-          data : cart  });
+  Cart.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+    .then((cart) => {
+      res.status(200).json({
+        message: "cart updated",
+        data: cart,
+      });
     })
-    .catch(err => {
-      res.status(400).json(
-        { message : "not updated", 
-      data : err});
-    })
-
- }
-
+    .catch((err) => {
+      res.status(400).json({ message: "not updated", data: err });
+    });
+};
 
 // delete cart
-const deletecart = async(req,res)=>{
-  const productId = req.params.id
-  const quantity = req.query.quantity
+const deletecart = async (req, res) => {
+  const productId = req.params.id;
+  const quantity = req.query.quantity;
 
   try {
-    const stock = await  Products.findById(productId)
+    const stock = await Products.findById(productId);
     await Cart.findByIdAndDelete(req.params.id);
-    const updatedStockQuantity = stock.quantity += quantity;
-    await Products.findOneAndUpdate({ _id: stock.id }, { quantity: updatedStockQuantity },{ new: true });
+    const updatedStockQuantity = (stock.quantity += quantity);
+    await Products.findOneAndUpdate(
+      { _id: stock.id },
+      { quantity: updatedStockQuantity },
+      { new: true }
+    );
     res.status(200).json("Cart has been deleted...");
-        
   } catch (err) {
     res.status(400).json(err);
   }
-}
+};
 
 module.exports = {
-    addToCart,
-    getCart,
-    updatecart,
-    deletecart
-}
+  addToCart,
+  getCart,
+  updatecart,
+  deletecart,
+};
