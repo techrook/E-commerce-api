@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const express = require("express");
 
 const userRouter = require("./user.routes");
 const adminRouter = require("./admin.routes");
@@ -7,7 +8,7 @@ const cartRouter = require("./cart.routes");
 const categoryRouter = require("./category.routes");
 
 const rootRouter = Router();
-
+const app = express();
 // routes
 rootRouter.use("/user", userRouter);
 rootRouter.use("/admin", adminRouter);

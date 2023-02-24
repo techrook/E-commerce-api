@@ -9,6 +9,7 @@ const productController = require("../controllers/product.controller");
 //middleware
 const auth = require("../middleware/authentication");
 const { checkAdmin } = require("../middleware/authorization");
+const addProductValidatorMiddleware = require("../validator/product.validator")
 
 const Storage = multer.diskStorage({
   destination: "product_images",

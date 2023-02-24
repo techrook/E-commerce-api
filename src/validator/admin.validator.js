@@ -11,8 +11,8 @@ const adminValidatorMiddleware = async (req, res, next) => {
 };
 
 const adminValidator = Joi.object({
-  firstname: Joi.string().min(1).max(16).required(),
-  lastname: Joi.string().min(1).max(16).required(),
+  firstname: Joi.string().min(1).max(16),
+  lastname: Joi.string().min(1).max(16),
   password: Joi.string().min(6).max(16).required(),
   email: Joi.string()
     .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
