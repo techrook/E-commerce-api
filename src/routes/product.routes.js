@@ -26,7 +26,7 @@ router.post(
   "/",
   auth,
   checkAdmin,
-  upload.single("productimage"),
+  upload.single("productImage"),
   productController.addProduct
 );
 router.patch("/:id", auth, checkAdmin, productController.updateProduct);
