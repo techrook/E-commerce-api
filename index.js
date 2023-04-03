@@ -1,9 +1,9 @@
 //build dependencies
+const cors = require('cors')
 const express = require('express');
-// const paystack = require('paystack').config(process.env.PAYSTACKSECRET)
+
 const app = express();
 const bodyParser = require('body-parser');
-
 require('dotenv').config();
 
 // parse application/x-www-form-urlencoded
@@ -22,7 +22,7 @@ const cartRouter = require('./routes/cart.routes');
 const categoryRouter = require('./routes/category.routes');
 
 app.use(express.json())
-
+app.use(cors())
 // routes
 app.use('/user',userRouter);
 app.use('/admin',adminRouter);

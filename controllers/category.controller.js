@@ -24,6 +24,8 @@ const  getACategories =  (req, res) => {
 }
 
 const  addCategories = (req, res) => {
+
+
     const category = req.body
 
      Category.create(category)
