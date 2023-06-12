@@ -2,9 +2,10 @@
   "name": "e-commerce-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon src/index.js",
+    "lint": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -26,7 +27,14 @@
     "nodemailer": "^6.9.2",
     "nodemon": "^2.0.20",
     "paypal-rest-sdk": "^1.8.1",
+<<<<<<< HEAD
     "paystack": "^2.0.1",
     "uuid": "^9.0.0"
+=======
+    "paystack": "^2.0.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.4"
+>>>>>>> 215fe0e00e6c021657ad6ee76e8524bce798054f
   }
 }
