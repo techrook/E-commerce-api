@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken')
 
 
 const UserSchema = new mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
+
     firstname:{
         type:String,
         required:true
@@ -30,13 +32,14 @@ const UserSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },
-    verified:{
-        type:Boolean,
-        default:false
+   verified: {
+        type: Boolean,
+        default: false
     }
 })
 
 //encrypting password 
+// @ts-ignore
 UserSchema.pre('save',async function(next){
  const salt = await bcrypt.genSalt(10)
  this.password = await bcrypt.hash(this.password,salt)
@@ -44,8 +47,10 @@ UserSchema.pre('save',async function(next){
 
 })
 
+
 //created a jwt for the user 
 UserSchema.methods.createjwt = function(){
+    // @ts-ignore
     return jwt.sign({userId:this._id, name:this.firstname, isAdmin:false},process.env.JWT_SECRET,
         {expiresIn:process.env.JWT_LIFESPAN})
 }

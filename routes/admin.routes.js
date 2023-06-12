@@ -12,4 +12,5 @@ router.delete('/:id', auth,deleteAdmin)
 
 
 
+
 module.exports = router;

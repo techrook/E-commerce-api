@@ -1,6 +1,7 @@
 const Admin = require('../models/admin.model')
 
 
+
 //register admin
 const createAdmin = async (req,res)=>{
      const emailExist = await Admin.findOne({ email: req.body.email }); //returns the first document that matches the query criteria or null
@@ -27,14 +28,19 @@ const loginAdmin = async(req,res)=>{
         res.status(403).json('Invalid User')
     } 
   ///checking if the admin password is correct by using bcrypt.compare
+    // @ts-ignore
     const ispasswordcorrect = await admin.checkpassword(password)
     if(!ispasswordcorrect){
         res.status(403).json('Invalid Password')
     }
     //sending the admin name and token
+    // @ts-ignore
     const token = admin.creatjwt()
+    // @ts-ignore
     res.status(201).json({admin:{name:admin.firstname}, token})
 }
+
+
 
 //update Admin
 const updateAdmin= async(req,res)=>{
@@ -50,6 +56,7 @@ const updateAdmin= async(req,res)=>{
 //delete admin
 const deleteAdmin = async(req,res)=>{
     try {
+        // @ts-ignore
         const deletedAdmin = await Admin.findByIdAndDelete(req.params.id)
             res.status(200).json({msg:'Admin has been deleted  sucessfully....'})
       } catch (error) {
@@ -62,5 +69,6 @@ module.exports ={
     createAdmin,
     loginAdmin,
     updateAdmin,
-    deleteAdmin
+    deleteAdmin,
+
 }
