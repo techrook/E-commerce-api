@@ -3,6 +3,7 @@ const User = require('../models/user.model')
 
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
 //email handler
 const nodemailer = require("nodemailer")
 
@@ -52,7 +53,7 @@ const createUser = async(req,res)=>{
      // Step 2 - Generate a verification token with the user's ID
      const verificationToken = user.createjwt();
      // Step 3 - Email the user a unique verification link
-     const url = `http://localhost:3023/user/verify/${verificationToken}`
+     const url = `http://localhost:3023/api/v1//user/verify/${verificationToken}`
      console.log(verificationToken);
      transporter.sendMail({
        to:email,
@@ -138,9 +139,88 @@ const verifyUser = async(req,res)=>{
    }
 }
 
+const forgetpassword = async(req,res)=>{
+  try {
+    const { email } = req.body;
+
+    // Check we have an email
+  if (!email) {
+    return res.status(422).send({ message: "Missing email." });
+ }
+    
+ 
+ const user = await User.findOne({ email });
+ 
+ if (!user) {
+   res.status(404).json({ message: 'User not found' });
+   return;
+  }
+  
+  // Generate reset token
+  const resetToken = user.createjwt();
+
+      const URL = `http://localhost:3023/api/v1//user/reset-password/${resetToken}`
+       console.log(URL);
+         transporter.sendMail({
+           to:email,
+           subject: 'Password Reset',
+           html: `<p>You requested a password reset. Click the link below to reset your password:</p>
+           <a href="${URL}">Reset Password</a>`
+         })
+         return res.status(201).send({
+          message: `Sent a password reset  email to ${email}`
+        });
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+
+}
+
+const restpassword = async(req,res)=>{
+  const { id } = req.params
+// console.log(id);
+ // Check we have an token
+  if (!id) {
+      return res.status(422).send({ 
+           message: "Missing token" 
+      });
+    }
+    let payload = null
+    try {
+      payload = jwt.verify(
+        id,
+          process.env.JWT_SECRET
+        );
+        res.status(200).send({
+          message: "token Verified"
+    });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
+  }
+
+const resetuserpassword =async(req,res)=>{
+try {
+  
+  const user = await User.findById(req.params.userId);
+        if (!user) return res.status(400).send("invalid link or expired");
 
 
-
+        user.password = req.body.password;
+        await user.save();
+    
+        res.status(200).send({
+          message: "password reset sucessfully"
+        })
+  
+} catch (error) {
+        res.send("An error occured");
+        console.log(error);
+}
+}
 
 
 
@@ -184,5 +264,8 @@ module.exports = {
     loginUser,
     updateUser,
     deleteUser,
-    verifyUser
+    verifyUser,
+    forgetpassword,
+    restpassword,
+    resetuserpassword
 }
