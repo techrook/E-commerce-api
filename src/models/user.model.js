@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { string, date } = require('joi');
 
 
 const UserSchema = new mongoose.Schema({
@@ -35,7 +36,15 @@ const UserSchema = new mongoose.Schema({
    verified: {
         type: Boolean,
         default: false
+    },
+  
+    resetToken:{
+        type:String
+    },
+    resetTokenExpiration:{
+        type:Date
     }
+
 })
 
 //encrypting password 

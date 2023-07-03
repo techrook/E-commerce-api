@@ -7,6 +7,9 @@ const {
   updateUser,
   deleteUser,
   verifyUser,
+  forgetpassword,
+  restpassword,
+  resetuserpassword
 } = require("../controllers/user.controllers");
 const auth = require("../middleware/authentication");
 const userValidatorMiddleware = require("../validator/user.validator");
@@ -16,5 +19,8 @@ router.post("/login", loginUser);
 router.put("/:id", auth, updateUser);
 router.delete("/:id", auth, deleteUser);
 router.get("/verify/:id", verifyUser)
+router.post("/forgetpassword",forgetpassword)
+router.get("/reset-password/:id", restpassword)
+router.post("/reset-password/:userId",   resetuserpassword)
 
 module.exports = router;
