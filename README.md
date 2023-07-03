@@ -96,7 +96,6 @@ CLOUDINARY_API_SECRET = cloudinary api secret
 
 ## APIs
 
----
 
 ### registar User
 
