@@ -6,6 +6,7 @@ const adminRouter = require("./admin.routes");
 const productRouter = require("./product.routes");
 const cartRouter = require("./cart.routes");
 const categoryRouter = require("./category.routes");
+const paymentRouter = require("./paymentcompleted.routes");
 
 const rootRouter = Router();
 const app = express();
@@ -15,6 +16,7 @@ rootRouter.use("/admin", adminRouter);
 rootRouter.use("/products", productRouter);
 rootRouter.use("/cart", cartRouter);
 rootRouter.use("/category", categoryRouter);
+rootRouter.use("/payment", paymentRouter);
 
 app.use(function (req, res) {
   res.status(404).send({ url: req.originalUrl + " not found" });

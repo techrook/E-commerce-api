@@ -1,8 +1,12 @@
-// const express = require('express');
-// const router = express.Router();
-// const {pay,callback }= require('../controllers/payment-controllers')
+const express = require('express');
+const router = express.Router();
+const {initiatePayment,handlePaymentCallback} = require('../controllers/payment.controller');
 
-// router.post('/pay', pay)
-// router.get('/callback', callback)
+// Route for initiating a payment
+router.post('/initiate/:id', initiatePayment);
 
-// module.exports = router
+// Route for handling the payment callback
+router.post('/callback',handlePaymentCallback);
+
+module.exports = router;
+
