@@ -13,7 +13,7 @@ require("./config/db").connect();
 app.use(rootMiddleware);
 
 // routes
-app.use("/api/v2/", rootRouter);
+app.use("/api/v1/", rootRouter);
 
 const port = process.env.PORT || 3023;
 
