@@ -12,7 +12,7 @@ const app = express();
 // routes
 rootRouter.use("/user", userRouter);
 rootRouter.use("/admin", adminRouter);
-rootRouter.use("/products", productRouter);
+rootRouter.use("/products", productRouter);    
 rootRouter.use("/cart", cartRouter);
 rootRouter.use("/category", categoryRouter);
 
