@@ -1,3 +1,4 @@
+// @ts-nocheck
 const Products = require("../models/product.model");
 const cloudinary = require("cloudinary");
 const fs = require("fs");

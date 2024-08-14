@@ -9,17 +9,17 @@ const UserSchema = new mongoose.Schema({
 
     firstname:{
         type:String,
-        required:true
-    },
+        required:true     
+    },      
     lastname:{
         type:String,
         required:true
     },
     password:{
-     type:String,
+     type:String,              
      required:true,
      minlength:6
-    },
+    },    
     email:{
         type:String,
         required:true,
@@ -32,10 +32,10 @@ const UserSchema = new mongoose.Schema({
     isAdmin:{
         type:Boolean,
         default:false
-    },
+    },  
    verified: {
         type: Boolean,
-        default: false
+        default: false 
     },
   
     resetToken:{

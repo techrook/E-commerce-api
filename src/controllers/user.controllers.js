@@ -53,7 +53,7 @@ const createUser = async(req,res)=>{
      // Step 2 - Generate a verification token with the user's ID
      const verificationToken = user.createjwt();
      // Step 3 - Email the user a unique verification link
-     const url = `http://localhost:3023/api/v1//user/verify/${verificationToken}`
+     const url = `http://localhost:3023/api/v1/user/verify/${verificationToken}`
      console.log(verificationToken);
      transporter.sendMail({
        to:email,
@@ -87,18 +87,18 @@ const loginUser = async(req,res)=>{
     if(!ispasswordcorrect){
         res.status(403).json('Invalid Password')
     }
-   // Ensure the account has been verified
-    if(!user.verified){
-      return res.status(403).send({ 
-            message: "Verify your Account." 
-      });
- }
+   // Ensure the account has been verified    
+//     if(!user.verified){    
+//       return res.status(403).send({ 
+//             message: "Verify your Account." 
+//       });
+//  }
       
     //sending the user name and token
-      const token = user.createjwt()
-    res.status(201).json({user:{user:user.firstname}, token})
+      const token = user.createjwt()    
+    res.status(201).json({user:{user:user.firstname}, userId:user._id, token})
 } 
-
+         
 const verifyUser = async(req,res)=>{
   const {id} =  req.params
   console.log(id)
@@ -197,7 +197,7 @@ const restpassword = async(req,res)=>{
           message: "token Verified"
     });
     } catch (error) {
-      console.log(error);
+      console.log(error);     
       res.status(500).send(error);
     }
   }
@@ -225,7 +225,18 @@ try {
 
 
 
-
+const getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
 
 
 
@@ -267,5 +278,6 @@ module.exports = {
     verifyUser,
     forgetpassword,
     restpassword,
-    resetuserpassword
+    resetuserpassword,
+    getUserById
 }
