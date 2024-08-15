@@ -224,7 +224,7 @@ try {
 
 
 
-
+// no edit the code
 const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
