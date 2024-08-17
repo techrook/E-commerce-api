@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-//defining schema
+//defining schema      
 const ProductSchema = new mongoose.Schema(
   {
     name: {
@@ -10,11 +10,11 @@ const ProductSchema = new mongoose.Schema(
     category: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Category",
-      },
+        ref: "Category",      
+      },   
     ],
-    description: {
-      type: String,
+    description: {      
+      type: String,         
       required: true,
     },
     price: {

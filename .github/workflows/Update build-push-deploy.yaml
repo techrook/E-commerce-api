@@ -1,0 +1,30 @@
+name: Build, Push and Deploy GCR Image to Cloud Run
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Login to Google Cloud
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: '${{ secrets.GCP_SA }}'
+        
+    - name: Build and Push Image to Google Container Registry
+      run: |
+          gcloud auth configure-docker
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/myapplication .
+          docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/myapplication
+
+    - name: Deploy to CloudRun
+      run: |
+        gcloud run deploy myapplication --region europe-west1 --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/myapplication --platform managed --allow-unauthenticated --project ${{ secrets.GCP_PROJECT_ID }}
+  

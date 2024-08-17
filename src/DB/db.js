@@ -1,13 +1,14 @@
+// @ts-nocheck
 const mongoose = require("mongoose");
 require("dotenv").config();
 
 mongoose.set("strictQuery", false);
 
-const connect = (url) => {
+const connect = () => {    
   mongoose.connect(process.env.MONGODB_URL);
 
   mongoose.connection.on("connected", () => {
-    console.log("Connected to MongoDB Successfully");
+    console.log("Connected to MongoDB Successfully To http://localhost:3023/");
   });
 
   mongoose.connection.on("error", (err) => {
@@ -17,3 +18,4 @@ const connect = (url) => {
 };
 
 module.exports = { connect };
+
