@@ -11,4 +11,4 @@ router.patch("/update/:id", auth, checkUser, cartController.updatecart);
 router.delete("/delete/:id", auth, cartController.deletecart);
 
 module.exports = router;
-     
+        
